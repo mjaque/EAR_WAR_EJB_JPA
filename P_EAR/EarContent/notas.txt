@@ -1,0 +1,2 @@
+Añadir en el directorio lib las librerías que se usarán en el EAR (WAR y EJB). 
+Sino se utilizarán las del servidor de aplicaciones (si las tiene). 

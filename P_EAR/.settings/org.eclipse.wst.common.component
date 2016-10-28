@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="P1TIW_EAR">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="P1TIW_EJB.jar" deploy-path="/" handle="module:/resource/P1TIW_EJB/P1TIW_EJB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="P1TIW_WAR_Usuarios.war" deploy-path="/" handle="module:/resource/P1TIW_WAR_Usuarios/P1TIW_WAR_Usuarios">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
