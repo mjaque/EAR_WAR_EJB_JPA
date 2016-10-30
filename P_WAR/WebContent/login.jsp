@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<%@include file="html/header.html"%>
-	<title>ModeloApp</title>
+	<title>Pr·ctica 1 TIW - Login</title>
 </head>
 
 <body>
@@ -18,33 +18,20 @@
 					<li role="presentation"><a href="#">Contact</a></li>
 				</ul>
 			</nav>
-			<h3 class="text-muted">Project name</h3>
+			<h3 class="text-muted">Pr·ctica 1 TIW</h3>
 		</div>
 
 		<div class="jumbotron">
 			<h1>Login</h1>
-			<%
-				String error = (String) request.getAttribute("error");
-				if (error != null) {
-			%>
-			<div class="alert alert-danger alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<strong>Error de Login:</strong> El usuario y la clave no coinciden.
-			</div>
-			<%
-				}
-			%>
+			<%@include file="html/error.html"%>
 
 			<form>
 				<input type="hidden" name="accion" value="login" />
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1"><span
 						class="glyphicon glyphicon-user" aria-hidden="true"></span></span> <input
-						type="text" class="form-control" placeholder="Usuario"
-						name="usuario" aria-describedby="basic-addon1">
+						type="text" class="form-control" placeholder="Email"
+						name="email" aria-describedby="basic-addon1">
 				</div>
 				<br />
 				<div class="input-group">
@@ -58,10 +45,8 @@
 				<p style="text-align:right"><a href="?accion=ir_registro">Registro de nuevo usuario</a></p>
 			</form>
 		</div>
-		<footer class="footer">
-			<p>&copy; 2016 Academia 19e37.com</p>
-			<p>Versi√≥n de compilaci√≥n: 1</p>
-		</footer>
+		<%@include file="html/footer.html"%>
+		<p>·ÈÌÛ˙ Ò— ¸‹ Á«</p>
 	</div> <!-- /container -->
 
 	<%@include file="html/javascript.html"%>

@@ -11,7 +11,7 @@
 			org.hibernate.dialect.MySQLDialect
 		</property>
 		<property name="hibernate.connection.url">
-			jdbc:mysql://localhost:3306/modelowebapp?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC
+			jdbc:mysql://localhost:3306/practica1
 		</property>
 		<property name="hibernate.connection.username">
 			root
@@ -44,10 +44,9 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
 
-
 		<!-- Mapping directo en las clases (Annotations) -->
-		<mapping class="negocio.Usuario"></mapping>
-
+		<mapping class="dominio.Usuario"></mapping>
+	
 		<!-- List of XML mapping files -->
 		<!-- <mapping resource="Employee.hbm.xml" /> -->
 

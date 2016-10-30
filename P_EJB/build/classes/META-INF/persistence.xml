@@ -14,12 +14,14 @@
 			<!-- The JDBC driver of your database -->
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<!-- The JDBC URL to the database instance -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/modelowebapp?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/practica1" />
 			
 			<!-- The database username -->
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<!-- The database password -->
 			<property name="javax.persistence.jdbc.password" value="root" />
+			
+<!-- 			<property name="hibernate.id.new_generator_mappings" value="false" /> -->
 
 			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" 
 				/> -->
@@ -39,8 +41,7 @@
 			<!-- <property name="format_sql" value="true" /> -->
 			<!-- <property name="use_sql_comments" value="false" /> -->
 
-			<!-- Drop and re-create the database schema on startup -->
-			<property name="hbm2ddl.auto" value="update" />
+			<property name="hbm2ddl.auto" value="create" />
 
 			<!-- <property name="hibernate.max_fetch_depth" value="3" /> -->
 			<!-- <property name="hibernate.connection.shutdown" value="true" /> -->

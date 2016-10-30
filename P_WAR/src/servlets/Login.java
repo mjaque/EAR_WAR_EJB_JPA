@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.DAOUsuarioRemote;
 import dominio.Usuario;
 
-//import ejb.Prueba;
-//import ejb.PruebaInterface;
-
 /**
  * Servlet implementation class Login
  */
@@ -24,14 +21,12 @@ public class Login extends HttpServlet {
 	
 	@EJB
 	private DAOUsuarioRemote daoUsuario;
-
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public Login() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -43,9 +38,7 @@ public class Login extends HttpServlet {
 		System.out.println("Cargado Login servlet");
 		
 		// Control de Acceso
-		//Usuario usuario = null;
-		daoUsuario.test();
-		Usuario usuario = daoUsuario.login(request.getParameter("usuario"), request.getParameter("clave"));
+		Usuario usuario = daoUsuario.login(request.getParameter("email"), request.getParameter("clave"));
 		if (usuario == null) {
 			// Fallo de Acceso
 			String error = "Fallo de login";
@@ -64,7 +57,6 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

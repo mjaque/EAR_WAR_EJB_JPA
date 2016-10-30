@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<%@include file="html/header.html"%>
-	<title>ModeloApp - MenÃº Principal</title>
+	<title>Práctica 1 TIW - Menú Principal</title>
 </head>
 
 <body>
@@ -19,15 +19,13 @@
 					<li role="presentation"><a href="#">Contact</a></li>
 				</ul>
 			</nav>
-			<h3 class="text-muted">Project name</h3>
+			<h3 class="text-muted">Práctica 1 TIW</h3>
 		</div>
 
 		<div>
-			<h1>MenÃº Principal</h1>
+			<h1>Menú Principal</h1>
 		</div>
-		<footer class="footer">
-			<p>&copy; 2016 Academia 19e37.com</p>
-		</footer>
+		<%@include file="html/footer.html"%>
 	</div> <!-- /container -->
 
 	<%@include file="html/javascript.html"%>
