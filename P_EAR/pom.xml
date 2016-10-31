@@ -1,34 +1,41 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>P1TIW_EAR</groupId>
-  <artifactId>P1TIW_EAR</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>ear</packaging>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-ear-plugin</artifactId>
-        <version>2.10</version>
-        <configuration>
-          <earSourceDirectory>EarContent</earSourceDirectory>
-          <version>6</version>
-          <defaultLibBundleDir>lib</defaultLibBundleDir>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-  	<dependency>
-  		<groupId>P1TIW_EJB</groupId>
-  		<artifactId>P1TIW_EJB</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>ejb</type>
-  	</dependency>
-  	<dependency>
-  		<groupId>P1TIW_WAR_Usuarios</groupId>
-  		<artifactId>P1TIW_WAR_Usuarios</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>war</type>
-  	</dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>P1TIW_EAR</groupId>
+	<artifactId>P1TIW_EAR</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>ear</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<earSourceDirectory>EarContent</earSourceDirectory>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>P1TIW_EJB</groupId>
+			<artifactId>P1TIW_EJB</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>P1TIW_WAR_Usuarios</groupId>
+			<artifactId>P1TIW_WAR_Usuarios</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>dom4j</groupId> -->
+<!-- 			<artifactId>dom4j</artifactId> -->
+<!-- 			<version>1.6.1</version> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
+	</dependencies>
 </project>

@@ -76,5 +76,11 @@ public class Usuario {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", clave=" + clave + ", email="
+				+ email + ", ciudad=" + ciudad + "]";
+	}
 	
 }

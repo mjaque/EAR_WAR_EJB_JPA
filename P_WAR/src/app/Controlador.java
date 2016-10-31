@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dominio.Usuario;
+
 /**
  * Servlet implementation class Controlador
  */
@@ -30,17 +32,25 @@ public class Controlador extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("TRON(Controlador.java): Cargado Controlador.");
 		String accion = request.getParameter("accion");
-		System.out.println("Recibida acción: " + accion);
+		System.out.println("TRON(Controlador.java): Recibida acción: " + accion);
 		RequestDispatcher rd;
 
 		if (accion == null) {
-			System.out.println("Sin acción especificada");
+			System.out.println("TRON(Controlador.java): Sin acción especificada");
 			rd = request.getRequestDispatcher("/login.jsp");
 		} else {
 			switch (accion) {
 			case "login":
 				rd = request.getRequestDispatcher("/Login");
+				break;
+			case "ir_perfil":
+				System.out.println("TRON(Controlador.java): " + (Usuario)(request.getSession().getAttribute("usuario")));
+				rd = request.getRequestDispatcher("/perfil.jsp");
+				break;
+			case "perfil":
+				rd = request.getRequestDispatcher("/Perfil");
 				break;
 			case "ir_registro":
 				rd = request.getRequestDispatcher("/registro.jsp");
@@ -53,7 +63,7 @@ public class Controlador extends HttpServlet {
 				break;
 			//Resto de acciones
 			default:
-				System.out.println("Acción desconocida: " + accion);
+				System.out.println("TRON(Controlador.java): Acción desconocida: " + accion);
 				rd = request.getRequestDispatcher("/login.jsp");
 			}
 		}

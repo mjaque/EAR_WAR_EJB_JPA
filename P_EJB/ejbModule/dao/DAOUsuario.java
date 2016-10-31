@@ -25,7 +25,7 @@ public class DAOUsuario implements DAOUsuarioRemote {
 	}
 	
 	@Override
-	public Usuario login(String email, String clave) {
+	public Usuario login(String email, String clave) throws DAOException{
 		System.out.println("TRON((DAOUsuario.login(" + email + ", " + clave + "):");
 		Usuario resultado = null;
 
@@ -41,24 +41,24 @@ public class DAOUsuario implements DAOUsuarioRemote {
 					.createQuery("SELECT u FROM Usuario u WHERE email = :email AND clave = MD5(:clave)", Usuario.class);
 			query.setParameter("email", email);
 			query.setParameter("clave", clave);
-			resultado = query.getSingleResult();
+			resultado = (Usuario)query.getSingleResult();
 			transaction.commit();
-			System.out.println("TRON(DAOUsuario.login()): OK.");
+			System.out.println("TRON(DAOUsuario.login()): OK. " + resultado);
 		} catch (Exception ex) {
 			System.out.println("TRON(DAOUsuario.login()): KO " + ex.getMessage());
 			if (transaction != null) {
 				transaction.rollback();
 			}
 			ex.printStackTrace();
+			throw new DAOException("Error logear al usuario.");
 		} finally {
 			manager.close();
 		}
-
 		return resultado;
 	}
 
 	@Override
-	public Usuario registro(Usuario nuevoUsuario) {
+	public Usuario registro(Usuario nuevoUsuario) throws DAOException{
 		System.out.println("TRON(DAOUsuario.registro("+nuevoUsuario+")):");
 		
 		EntityManager manager = null;
@@ -78,11 +78,39 @@ public class DAOUsuario implements DAOUsuarioRemote {
 				transaction.rollback();
 			}
 			ex.printStackTrace();
+			throw new DAOException("Error al modificar los datos del usuario.");
 		} finally {
 			manager.close();
 		}
 
 		return nuevoUsuario;
+	}
+
+	@Override
+	public void modificar(Usuario usuario) throws DAOException{
+		System.out.println("TRON(DAOUsuario.modificar("+usuario+")):");
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOUsuario.modificar()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			transaction.begin();
+			manager.merge(usuario);
+			transaction.commit();
+			System.out.println("TRON(DAOUsuario.modificar()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOUsuario.modificar()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al modificar los datos del usuario.");
+		} finally {
+			manager.close();
+		}
 	}
 
 }

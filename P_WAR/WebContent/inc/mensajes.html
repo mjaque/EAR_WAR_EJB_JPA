@@ -1,0 +1,59 @@
+			<%
+				String error = (String) request.getAttribute("error");
+				if (error != null) {
+			%>
+			<div class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>Error:</strong> <%= error %>
+			</div>
+			<%
+				}
+			%>
+			
+			<%
+				String warning = (String) request.getAttribute("warning");
+				if (warning != null) {
+			%>
+			<div class="alert alert-warning alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>Aviso:</strong> <%= warning %>
+			</div>
+			<%
+				}
+			%>
+			
+			<%
+				String success = (String) request.getAttribute("success");
+				if (success != null) {
+			%>
+			<div class="alert alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<%= success %>
+			</div>
+			<%
+				}
+			%>
+			
+			<%
+				String info = (String) request.getAttribute("info");
+				if (info != null) {
+			%>
+			<div class="alert alert-info alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>Info:</strong> <%= info %>
+			</div>
+			<%
+				}
+			%>

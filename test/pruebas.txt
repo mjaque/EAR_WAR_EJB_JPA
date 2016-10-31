@@ -1,0 +1,9 @@
+- DROP DATABASE practica1;
+- CREATE DATABASE practica1;
+- Ver Acerca De:
+- Volver al Login
+- Intentar un login: fallo.
+- Registro de Usuario: 
+- Login: OK
+- Modificar datos de usuario:
+- Login: OK.
