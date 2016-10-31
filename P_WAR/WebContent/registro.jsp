@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%><!DOCTYPE html>
 <html lang="es">
 <head>
 	<%@include file="inc/header.html"%>
-	<title>Pr·ctica 1 TIW - Registro de Usuario</title>
+	<title>Pr√°ctica 1 TIW - Registro de Usuario</title>
 </head>
 
 <body>
@@ -12,7 +11,7 @@
 	<div class="container">
 		<div class="header clearfix">
 			<%@include file="inc/nav_nologin.html" %>
-			<h3 class="text-muted">Pr·ctica 1 TIW</h3>
+			<h3 class="text-muted">Pr√°ctica 1 TIW</h3>
 		</div>
 
 		<div class="jumbotron">
@@ -22,7 +21,7 @@
 				<input type="hidden" name="accion" value="registro" />
 				<jsp:include page="inc/form_usuario.jsp" />
 				<br />
-				<p>Al pulsar el botÛn aceptas las condiciones criminales que te
+				<p>Al pulsar el bot√≥n aceptas las condiciones criminales que te
 					imponemos.</p>
 				<button type="submit" class="btn btn-primary btn-lg">Alta</button>
 			</form>

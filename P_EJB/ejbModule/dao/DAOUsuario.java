@@ -113,4 +113,32 @@ public class DAOUsuario implements DAOUsuarioRemote {
 		}
 	}
 
+	public void baja(Usuario usuario) throws DAOException{
+		System.out.println("TRON(DAOUsuario.baja("+usuario+")):");
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOUsuario.baja()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			transaction.begin();
+			if (!manager.contains(usuario))
+				usuario = manager.merge(usuario);			
+			manager.remove(usuario);
+			transaction.commit();
+			System.out.println("TRON(DAOUsuario.baja()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOUsuario.baja()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al dar de baja al usuario.");
+		} finally {
+			manager.close();
+		}
+	}
+
 }

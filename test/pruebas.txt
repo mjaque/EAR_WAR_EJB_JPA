@@ -1,5 +1,7 @@
 - DROP DATABASE practica1;
 - CREATE DATABASE practica1;
+- Arrancar GlassFish e instalar paquete EAR.
+- Conectar con localhost:8080/P1TIW
 - Ver Acerca De:
 - Volver al Login
 - Intentar un login: fallo.
@@ -7,3 +9,6 @@
 - Login: OK
 - Modificar datos de usuario:
 - Login: OK.
+- Dar de Baja al usuario.
+- Crear otro usuario. Login.
+- 

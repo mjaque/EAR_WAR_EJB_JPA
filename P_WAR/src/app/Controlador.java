@@ -41,34 +41,49 @@ public class Controlador extends HttpServlet {
 			System.out.println("TRON(Controlador.java): Sin acción especificada");
 			rd = request.getRequestDispatcher("/login.jsp");
 		} else {
-			switch (accion) {
-			case "login":
-				rd = request.getRequestDispatcher("/Login");
-				break;
-			case "ir_perfil":
-				System.out.println("TRON(Controlador.java): " + (Usuario)(request.getSession().getAttribute("usuario")));
-				rd = request.getRequestDispatcher("/perfil.jsp");
-				break;
-			case "perfil":
-				rd = request.getRequestDispatcher("/Perfil");
-				break;
-			case "ir_registro":
-				rd = request.getRequestDispatcher("/registro.jsp");
-				break;
-			case "registro":
-				rd = request.getRequestDispatcher("/Registro");
-				break;
-			case "baja":
-				rd = request.getRequestDispatcher("/Baja");
-				break;
-			//Resto de acciones
-			default:
-				System.out.println("TRON(Controlador.java): Acción desconocida: " + accion);
-				rd = request.getRequestDispatcher("/login.jsp");
+			if (request.getSession().getAttribute("usuario") == null) {
+				switch (accion) {
+				case "login":
+					rd = request.getRequestDispatcher("/Login");
+					break;
+				case "ir_registro":
+					rd = request.getRequestDispatcher("/registro.jsp");
+					break;
+				// Resto de acciones
+				default:
+					System.out.println("TRON(Controlador.java): Acción desconocida sin usuario: " + accion);
+					rd = request.getRequestDispatcher("/login.jsp");
+				}
+			} else {
+				switch (accion) {
+				case "login":
+					rd = request.getRequestDispatcher("/Login");
+					break;
+				case "ir_perfil":
+					System.out.println(
+							"TRON(Controlador.java): " + (Usuario) (request.getSession().getAttribute("usuario")));
+					rd = request.getRequestDispatcher("/perfil.jsp");
+					break;
+				case "perfil":
+					rd = request.getRequestDispatcher("/Perfil");
+					break;
+				case "ir_registro":
+					rd = request.getRequestDispatcher("/registro.jsp");
+					break;
+				case "registro":
+					rd = request.getRequestDispatcher("/Registro");
+					break;
+				case "baja":
+					rd = request.getRequestDispatcher("/Baja");
+					break;
+				// Resto de acciones
+				default:
+					System.out.println("TRON(Controlador.java): Acción desconocida con usuario: " + accion);
+					rd = request.getRequestDispatcher("/menu_principal.jsp");
+				}
 			}
 		}
 		rd.forward(request, response);
-
 	}
 
 	/**
