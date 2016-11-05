@@ -1,7 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 			<nav>
 				<ul class="nav nav-pills pull-right">
 					<li role="presentation" class="active"><a href="/menu_principal.jsp">Menu</a></li>
-					<li role="presentation"><a href="/productos.jsp">Productos</a></li>
+					<li role="presentation" class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos<b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+							<li><a tabindex="-1" href="?accion=listado_productos">Listado</a></li>
+      						<li><a tabindex="-1" href="?accion=ir_alta_producto">Alta</a></li>
+      						<li><a tabindex="-1" href="?accion=ir_buscar_productos">Búsqueda</a></li>
+						</ul>
+					</li>
 					<li role="presentation"><a href="/chat.jsp">Chat</a></li>
 					<li role="presentation"><a href="?accion=ir_perfil">Perfil</a></li>
 					<li role="presentation"><a href="acerca.jsp">Acerca de</a></li>

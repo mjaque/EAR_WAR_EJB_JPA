@@ -39,7 +39,6 @@
 			</form>
 		</div>
 		<%@include file="inc/footer.html"%>
-		<p>áéíóú ñÑ üÜ çÇ</p>
 	</div> <!-- /container -->
 
 	<%@include file="inc/javascript.html"%>

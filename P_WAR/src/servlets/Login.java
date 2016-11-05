@@ -16,7 +16,7 @@ import dominio.Usuario;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
+@WebServlet(description = "Realiza el login del usuario", urlPatterns = { "/Login" })
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

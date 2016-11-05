@@ -17,6 +17,8 @@ import dominio.Usuario;
 @WebServlet("/Controlador")
 public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final String DIR_IMG = "/var/practica1/uploads/";
+	public static final String URL_IMG = "uploads/";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -49,6 +51,9 @@ public class Controlador extends HttpServlet {
 				case "ir_registro":
 					rd = request.getRequestDispatcher("/registro.jsp");
 					break;
+				case "registro":
+					rd = request.getRequestDispatcher("/Registro");
+					break;
 				// Resto de acciones
 				default:
 					System.out.println("TRON(Controlador.java): Acción desconocida sin usuario: " + accion);
@@ -76,6 +81,16 @@ public class Controlador extends HttpServlet {
 				case "baja":
 					rd = request.getRequestDispatcher("/Baja");
 					break;
+				case "listado_productos":
+					rd = request.getRequestDispatcher("/ListadoProductos");
+					break;
+				case "ir_alta_producto":
+					rd = request.getRequestDispatcher("/alta_producto.jsp");
+					break;
+				case "alta_producto":
+					rd = request.getRequestDispatcher("/AltaProducto");
+					break;
+					
 				// Resto de acciones
 				default:
 					System.out.println("TRON(Controlador.java): Acción desconocida con usuario: " + accion);

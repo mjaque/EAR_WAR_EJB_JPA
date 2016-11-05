@@ -1,10 +1,15 @@
 package dominio;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +33,9 @@ public class Usuario {
 	
 	@Column(nullable = false, length = 50, name = "ciudad")
 	private String ciudad;
+	
+	 @OneToMany(mappedBy = "usuario")
+	 private Set<Producto> productos = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -76,11 +84,23 @@ public class Usuario {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
+	
+	public Set<Producto> getProductos() {
+		return productos;
+	}
+
+	public boolean addProducto(Producto producto) {
+		boolean result = this.productos.add(producto);
+		if (producto.getUsuario() != this) {
+            producto.setUsuario(this);
+        }
+		return result;
+	}
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", clave=" + clave + ", email="
-				+ email + ", ciudad=" + ciudad + "]";
+				+ email + ", ciudad=" + ciudad + ", productos=" + productos + "]";
 	}
 	
 }

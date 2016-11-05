@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.Set;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -7,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import dominio.Producto;
 import dominio.Usuario;
 
 
@@ -139,6 +142,11 @@ public class DAOUsuario implements DAOUsuarioRemote {
 		} finally {
 			manager.close();
 		}
+	}
+
+	public Set<Producto> verProductos(Usuario usuario)  throws DAOException{
+		System.out.println("TRON(DAOUsuario.verProductos(" + usuario +").");
+		return usuario.getProductos();
 	}
 
 }
