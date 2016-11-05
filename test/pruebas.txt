@@ -1,5 +1,6 @@
 - DROP DATABASE practica1;
 - CREATE DATABASE practica1;
+- Crear el directorio /var/practica1/uploads con permisos de totales (rwx) para todos los usuarios
 - Arrancar GlassFish e instalar paquete EAR.
 - Conectar con localhost:8080/P1TIW
 - Ver Acerca De:
@@ -11,4 +12,6 @@
 - Login: OK.
 - Dar de Baja al usuario.
 - Crear otro usuario. Login.
-- 
+- Ir al menú Productos->Alta
+- Dar de alta un producto -> Debería aparecer el listado de productos con el nuevo producto.
+	- Debe verse con la foto.

@@ -1,17 +1,15 @@
 package dao;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 import dominio.Producto;
 import dominio.Usuario;
-import dominio.Producto;
 
 
 /**
@@ -111,9 +109,71 @@ public class DAOProducto implements DAOProductoRemote{
 	}
 
 	@Override
-	public Set<Producto> verProductos(Usuario usuario)  throws DAOException{
+	public List<Producto> verProductos(Usuario usuario) throws DAOException{
 		System.out.println("TRON(DAOProducto.verProductos(" + usuario +").");
 		return usuario.getProductos();
 	}
+
+	@Override
+	public List<Producto> verProductos() throws DAOException{
+		System.out.println("TRON(DAOProducto.verProductos()):");
+		List<Producto> productos = null;
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOProducto.verProductos()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			transaction.begin();
+			productos = (List<Producto>)manager.createQuery("SELECT p FROM Producto p")
+					.setMaxResults(5)
+					.getResultList(); 
+			transaction.commit();
+			System.out.println("TRON(DAOProducto.verProductos()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOProducto.verProductos()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al buscar Productos.");
+		} finally {
+			manager.close();
+		}
+		return productos;
+	}
+
+	@Override
+	public List<Producto> buscarProductos(String criterio) throws DAOException{
+		System.out.println("TRON(DAOProducto.buscarProductos()):");
+		List<Producto> productos = null;
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOProducto.buscarProductos()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			transaction.begin();
+			productos = (List<Producto>)manager.createQuery("SELECT p FROM Producto p "
+					+ "WHERE LOWER(titulo) LIKE :criterio OR LOWER(descripcion) LIKE :criterio")
+					.setParameter("criterio", "%"+criterio.toLowerCase()+"%")
+					.getResultList(); 
+			transaction.commit();
+			System.out.println("TRON(DAOProducto.buscarProductos()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOProducto.buscarProductos()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al buscar Productos (con criterio).");
+		} finally {
+			manager.close();
+		}
+		return productos;	}
 
 }

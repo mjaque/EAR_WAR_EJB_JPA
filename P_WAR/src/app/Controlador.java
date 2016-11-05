@@ -81,6 +81,9 @@ public class Controlador extends HttpServlet {
 				case "baja":
 					rd = request.getRequestDispatcher("/Baja");
 					break;
+				case "ir_menu_principal":
+					rd = request.getRequestDispatcher("/MenuPrincipal");
+					break;
 				case "listado_productos":
 					rd = request.getRequestDispatcher("/ListadoProductos");
 					break;
@@ -89,6 +92,9 @@ public class Controlador extends HttpServlet {
 					break;
 				case "alta_producto":
 					rd = request.getRequestDispatcher("/AltaProducto");
+					break;
+				case "buscar":
+					rd = request.getRequestDispatcher("/Buscar");
 					break;
 					
 				// Resto de acciones

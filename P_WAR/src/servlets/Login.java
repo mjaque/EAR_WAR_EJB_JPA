@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
 				System.out.println("TRON(Login.java): OK");
 				System.out.println("TRON(Login.java): "+ usuario);
 				request.getSession().setAttribute("usuario", usuario);
-				request.getRequestDispatcher("/menu_principal.jsp").forward(request, response);
+				request.getRequestDispatcher("/MenuPrincipal").forward(request, response);
 			}
 		} catch (DAOException e) {
 			System.out.println("TRON(Login.java): KO. " + e.getMessage());

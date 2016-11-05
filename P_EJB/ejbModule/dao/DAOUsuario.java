@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -144,7 +144,7 @@ public class DAOUsuario implements DAOUsuarioRemote {
 		}
 	}
 
-	public Set<Producto> verProductos(Usuario usuario)  throws DAOException{
+	public List<Producto> verProductos(Usuario usuario)  throws DAOException{
 		System.out.println("TRON(DAOUsuario.verProductos(" + usuario +").");
 		return usuario.getProductos();
 	}

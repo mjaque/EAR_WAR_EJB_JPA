@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -45,7 +45,7 @@ public class ListadoProductos extends HttpServlet {
 		try {
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			DAOUsuario dao = new DAOUsuario();
-			Set<Producto> listadoProductos = dao.verProductos(usuario);
+			List<Producto> listadoProductos = dao.verProductos(usuario);
 			if (listadoProductos.size() == 0){
 				String warning = "No hay productos";
 				request.setAttribute("warning", warning);
