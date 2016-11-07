@@ -42,6 +42,11 @@ public class Producto {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
+	public enum Estado {Disponible, Reservado, Vendido};
+	@Column(name = "estado")
+	@Enumerated(EnumType.STRING)
+	private Estado estado;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -86,6 +91,12 @@ public class Producto {
         if (!usuario.getProductos().contains(this)) {
             usuario.addProducto(this);
         }
+	}
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 	
 	@Override

@@ -49,13 +49,13 @@ public class Buscar extends HttpServlet {
 				request.setAttribute("warning", warning);
 			}
 			request.setAttribute("listadoProductos", listadoProductos);
-			request.getRequestDispatcher("/listado_productos.jsp").forward(request, response);
+			request.getRequestDispatcher("/ListadoProductos").forward(request, response);
 		} catch (DAOException e) {
 			System.out.println("TRON(Buscar.java): KO. " + e.getMessage());
 			e.printStackTrace();
 			String error = "Error al obtener el resultados de búsqueda de productos.";
 			request.setAttribute("error", error);
-			request.getRequestDispatcher("/menu_principal.jsp").forward(request, response);
+			request.getRequestDispatcher("/MenuPrincipal").forward(request, response);
 		}
 
 	}

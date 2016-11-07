@@ -84,7 +84,7 @@ public class Registro extends HttpServlet {
 				nuevoUsuario = daoUsuario.registro(nuevoUsuario);
 				request.getSession().setAttribute("usuario", nuevoUsuario);
 				System.out.println("TRON(Registro.java): OK");
-				request.getRequestDispatcher("/menu_principal.jsp").forward(request, response);
+				request.getRequestDispatcher("/MenuPrincipal").forward(request, response);
 			}
 		} catch (DAOException e) {
 			System.out.println("TRON(Regisstro.java): KO. " + e.getMessage());

@@ -17,6 +17,8 @@ public interface DAOProductoRemote {
 	public void baja(Producto Producto) throws DAOException;
 	public List<Producto> verProductos(Usuario usuario) throws DAOException;
 	public List<Producto> verProductos() throws DAOException;
-	List<Producto> buscarProductos(String parameter) throws DAOException;
+	public List<Producto> buscarProductos(String parameter) throws DAOException;
+	public Producto getProducto(Integer id) throws DAOException;
+	void baja(Integer idProducto) throws DAOException;
 
 }

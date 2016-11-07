@@ -77,6 +77,9 @@ public class AltaProducto extends HttpServlet {
 					case "categoria":
 						nuevoProducto.setCategoria(Producto.Categoria.valueOf(fieldvalue));
 						break;
+					case "estado":
+						nuevoProducto.setEstado(Producto.Estado.valueOf(fieldvalue));
+						break;
 					case "descripcion":
 						nuevoProducto.setDescripcion(fieldvalue);
 						break;
@@ -102,13 +105,13 @@ public class AltaProducto extends HttpServlet {
 			System.out.println("TRON(AltaProducto.java): OK");
 			String success = "El producto se registró correctamente.";
 			request.setAttribute("success", success);
-			request.getRequestDispatcher("/alta_producto.jsp").forward(request, response);
+			request.getRequestDispatcher("/ListadoProductos").forward(request, response);
 		} catch (Exception e) {
 			System.out.println("TRON(AltaProducto.java): KO. " + e.getMessage());
 			e.printStackTrace();
 			String error = "Error al insertar producto.";
 			request.setAttribute("error", error);
-			request.getRequestDispatcher("?accion=ir_alta_producto").forward(request, response);
+			request.getRequestDispatcher("/alta_producto.jsp").forward(request, response);
 		}
 	}
 

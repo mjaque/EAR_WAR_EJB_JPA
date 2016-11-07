@@ -145,8 +145,8 @@ public class DAOUsuario implements DAOUsuarioRemote {
 	}
 
 	public List<Producto> verProductos(Usuario usuario)  throws DAOException{
-		System.out.println("TRON(DAOUsuario.verProductos(" + usuario +").");
-		return usuario.getProductos();
+		DAOProducto daoProducto = new DAOProducto();
+		return daoProducto.verProductos(usuario);
 	}
 
 }

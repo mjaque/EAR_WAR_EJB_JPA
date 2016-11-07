@@ -57,7 +57,7 @@ public class ListadoProductos extends HttpServlet {
 			e.printStackTrace();
 			String error = "Error al obtener el listado de productos del usuario.";
 			request.setAttribute("error", error);
-			request.getRequestDispatcher("/menu_principal.jsp").forward(request, response);
+			request.getRequestDispatcher("/MenuPrincipal").forward(request, response);
 		}
 
 	}

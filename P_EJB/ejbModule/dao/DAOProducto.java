@@ -65,7 +65,19 @@ public class DAOProducto implements DAOProductoRemote{
 			System.out.println("TRON(DAOProducto.modificar()): EntityManager creado.");
 			transaction = manager.getTransaction();
 			transaction.begin();
-			manager.merge(producto);
+			Producto producto2 = this.getProducto(producto.getId());	//Lo cargamos de la BBDD para que esté en la transacción de JPA
+			producto2.setCategoria(producto.getCategoria());
+			producto2.setEstado(producto.getEstado());
+			producto2.setDescripcion(producto.getDescripcion());
+			producto2.setPrecio(producto.getPrecio());
+			producto2.setTitulo(producto.getTitulo());
+			System.out.println("TRON(DAOProducto.modificar()): urlFoto = " + producto.getUrlFoto());
+			System.out.println("TRON(DAOProducto.modificar()): urlFoto (en BBDD) = " + producto2.getUrlFoto());
+			if (producto.getUrlFoto() != null){	//Si es null, no se modifica
+				producto2.setUrlFoto(producto.getUrlFoto());
+			}
+			producto2.setUsuario(producto.getUsuario());
+			manager.merge(producto2);
 			transaction.commit();
 			System.out.println("TRON(DAOProducto.modificar()): OK");
 		} catch (Exception ex) {
@@ -111,7 +123,33 @@ public class DAOProducto implements DAOProductoRemote{
 	@Override
 	public List<Producto> verProductos(Usuario usuario) throws DAOException{
 		System.out.println("TRON(DAOProducto.verProductos(" + usuario +").");
-		return usuario.getProductos();
+		System.out.println("TRON(DAOProducto.verProductos()):");
+		List<Producto> productos = null;
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOProducto.verProductos()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			transaction.begin();
+			productos = (List<Producto>)manager.createQuery("SELECT p FROM Producto p WHERE idUsuario = :idUsuario")
+					.setParameter("idUsuario", usuario.getId())
+					.getResultList(); 
+			transaction.commit();
+			System.out.println("TRON(DAOProducto.verProductos()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOProducto.verProductos()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al buscar Productos de usuario.");
+		} finally {
+			manager.close();
+		}
+		return productos;
 	}
 
 	@Override
@@ -174,6 +212,70 @@ public class DAOProducto implements DAOProductoRemote{
 		} finally {
 			manager.close();
 		}
-		return productos;	}
+		return productos;	
+	}
+
+	@Override
+	public Producto getProducto(Integer id) throws DAOException {
+		System.out.println("TRON(DAOProducto.getProducto(" + id +")):");
+		Producto producto = null;
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOProducto.getProducto()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			transaction.begin();
+			producto = (Producto)manager.createQuery("SELECT p FROM Producto p "
+					+ "WHERE id = :id")
+					.setParameter("id", id)
+					.getSingleResult(); 
+			transaction.commit();
+			System.out.println("TRON(DAOProducto.getProducto()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOProducto.getProducto()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al buscar Producto("+id+").");
+		} finally {
+			manager.close();
+		}
+		return producto;
+	}
+
+	@Override
+	public void baja(Integer idProducto) throws DAOException{
+		System.out.println("TRON(DAOProducto.baja("+idProducto+")):");
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOProducto.baja()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			Producto producto = this.getProducto(idProducto);
+			transaction.begin();
+			if (!manager.contains(producto))
+				producto = manager.merge(producto);			
+			manager.remove(producto);
+			transaction.commit();
+			System.out.println("TRON(DAOProducto.baja()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOProducto.baja()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al dar de baja el producto.");
+		} finally {
+			manager.close();
+		}
+		
+	}
 
 }

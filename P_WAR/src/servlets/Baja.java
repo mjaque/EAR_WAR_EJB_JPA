@@ -43,13 +43,13 @@ public class Baja extends HttpServlet {
 			dao.baja(usuario);
 			String success = "La baja del usuario se realizó correctamente.";
 			request.setAttribute("success", success);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/Controlador").forward(request, response);
 		} catch (DAOException e) {
 			System.out.println("TRON(Baja.java): KO. " + e.getMessage());
 			e.printStackTrace();
 			String error = "Error al procesar la baja.";
 			request.setAttribute("error", error);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/MenuPrincipal").forward(request, response);
 		}
 	}
 

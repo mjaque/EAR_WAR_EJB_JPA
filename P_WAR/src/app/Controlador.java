@@ -25,7 +25,6 @@ public class Controlador extends HttpServlet {
 	 */
 	public Controlador() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -65,8 +64,6 @@ public class Controlador extends HttpServlet {
 					rd = request.getRequestDispatcher("/Login");
 					break;
 				case "ir_perfil":
-					System.out.println(
-							"TRON(Controlador.java): " + (Usuario) (request.getSession().getAttribute("usuario")));
 					rd = request.getRequestDispatcher("/perfil.jsp");
 					break;
 				case "perfil":
@@ -96,11 +93,19 @@ public class Controlador extends HttpServlet {
 				case "buscar":
 					rd = request.getRequestDispatcher("/Buscar");
 					break;
-					
+				case "ir_producto":
+					rd = request.getRequestDispatcher("/producto.jsp");
+					break;
+				case "modificar_producto":
+					rd = request.getRequestDispatcher("/ModificarProducto");
+					break;
+				case "baja_producto":
+						rd = request.getRequestDispatcher("/BajaProducto");
+						break;
 				// Resto de acciones
 				default:
 					System.out.println("TRON(Controlador.java): Acción desconocida con usuario: " + accion);
-					rd = request.getRequestDispatcher("/menu_principal.jsp");
+					rd = request.getRequestDispatcher("/MenuPrincipal");
 				}
 			}
 		}

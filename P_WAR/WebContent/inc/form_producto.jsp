@@ -1,16 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="dominio.Producto"%>
+<%@ page import="dao.DAOProducto"%>
 <%@ page import="java.math.BigDecimal"%>
 <%
+	Integer id = null;
 	String titulo = "";
 	String descripcion = "";
 	String urlFoto = "";
-	BigDecimal precio = null;
-	Producto.Categoria categoria;
+	BigDecimal precio = new BigDecimal(0.0);
+	Producto.Categoria categoria = Producto.Categoria.Vehiculos;
+	Producto.Estado estado = Producto.Estado.Disponible;
 
-	if (request.getSession().getAttribute("producto") != null) {
-		//Completar los datos del producto.
+	System.out.println("TRON: form_producto.jsp. idProducto = " + request.getParameter("idProducto"));
+	if (request.getParameter("idProducto") != null) {
+		DAOProducto dao = new DAOProducto();
+		Producto producto = dao.getProducto(Integer.valueOf(request.getParameter("idProducto")));
+		id = producto.getId();
+		titulo = producto.getTitulo();
+		descripcion = producto.getDescripcion();
+		urlFoto = producto.getUrlFoto();
+		precio = producto.getPrecio();
+		categoria = producto.getCategoria();
+		estado = producto.getEstado();
+		%>
+		<input type="hidden" id="idProducto" name="id" value="<%=id%>"/>
+		<%
 	}
 %>
 <div class="input-group">
@@ -25,7 +40,7 @@
 		class="glyphicon glyphicon-euro" aria-hidden="true"></span></span> <input
 		type="number" min="0" max="999999" step="0.01" class="form-control"
 		placeholder="Precio" name="precio" aria-describedby="basic-addon1"
-		value="null">
+		value="<%=precio%>">
 </div>
 <br />
 <div class="input-group dropdown">
@@ -33,21 +48,67 @@
 		class="glyphicon glyphicon-tasks" aria-hidden="true"></span></span>
 	<span>Categoría: </span>
 	<select name="categoria">
-		<option value="Vehiculos">Vehículos</option>
-		<option value="Moda">Moda</option>
-		<option value="Electrodomesticos">Electrodomésticos</option>
-		<option value="Libros">Libros</option>
+		<option value="Vehiculos"
+		<%
+		if (categoria.equals(Producto.Categoria.Vehiculos)){%>
+			selected 
+		<%} %>
+		>Vehículos</option>
+		<option value="Moda"
+		<%
+		if (categoria.equals(Producto.Categoria.Moda)){%>
+			selected
+		<%} %>
+		>Moda</option>
+		<option value="Electrodomesticos"
+		<%
+		if (categoria.equals(Producto.Categoria.Electrodomesticos)){%>
+			selected
+		<%} %>
+		>Electrodomésticos</option>
+		<option value="Libros"
+		<%
+		if (categoria.equals(Producto.Categoria.Libros)){%>
+			selected
+		<%} %>
+		>Libros</option>
+	</select>
+</div>
+<br />
+<div class="input-group dropdown">
+	<span class="input-group-addon" id="basic-addon1"><span
+		class="glyphicon glyphicon-tags" aria-hidden="true"></span></span>
+	<span>Estado: </span>
+	<select name="estado">
+		<option value="Disponible"
+		<%
+		if (estado.equals(Producto.Estado.Disponible)){%>
+			selected 
+		<%} %>
+		>Disponible</option>
+		<option value="Reservado"
+		<%
+		if (estado.equals(Producto.Estado.Reservado)){%>
+			selected
+		<%} %>
+		>Reservado</option>
+		<option value="Vendido"
+		<%
+		if (estado.equals(Producto.Estado.Vendido)){%>
+			selected
+		<%} %>
+		>Vendido</option>
 	</select>
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-addon" id="basic-addon1"><span
 		class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </span>
-	<textarea name="descripcion"></textarea>
+	<textarea name="descripcion"><%=descripcion%></textarea>
 
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-addon" id="basic-addon1">Foto:</span><input
-		type="file" id="foto" name="foto" aria-describedby="basic-addon1" value="null">
+		type="file" id="foto" name="foto" aria-describedby="basic-addon1" value="<%=urlFoto%>">
 </div>

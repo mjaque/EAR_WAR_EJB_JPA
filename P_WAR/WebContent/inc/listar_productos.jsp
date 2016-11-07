@@ -17,7 +17,7 @@
 					%>
 					<div class="col-md-3 producto">
 						<a class="producto"
-							href="?accion=ir_producto&id=<%=prod.getId()%>"> <img
+							href="?accion=ir_producto&idProducto=<%=prod.getId()%>"> <img
 							class="producto" src="<%=prod.getUrlFoto()%>"
 							alt="<%=prod.getDescripcion()%>" title="<%=prod.getDescripcion()%>" />
 						</a>
@@ -25,6 +25,7 @@
 							<p class="producto titulo"><%=prod.getTitulo()%></p>
 							<p>
 								<span class="producto categoria"><%=prod.getCategoria()%></span>
+								<span class="producto estado"><%=prod.getEstado()%></span>
 								<span class="producto precio"><%=prod.getPrecio()%>€</span>
 							</p>
 						</div>

@@ -28,6 +28,11 @@ span.producto.categoria{
 	color: blue;
 }
 
+span.producto.estado{
+	font-weight: bold;
+	color: green;
+}
+
 span.producto.precio{
 	margin-left: 3em;
 	font-size: 1.5em;
