@@ -80,6 +80,7 @@ public class Registro extends HttpServlet {
 				nuevoUsuario.setApellidos(apellidos);
 				nuevoUsuario.setClave(sbClaveEncriptada.toString());
 				nuevoUsuario.setCiudad(ciudad);
+				nuevoUsuario.setAdmin(false);
 				
 				nuevoUsuario = daoUsuario.registro(nuevoUsuario);
 				request.getSession().setAttribute("usuario", nuevoUsuario);

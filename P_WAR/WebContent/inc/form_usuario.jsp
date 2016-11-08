@@ -2,18 +2,26 @@
     pageEncoding="UTF-8"%>
 			<%@ page import="dominio.Usuario" %> 
 			<% 
+				Integer idUsuario = null;
 				String email = "";
 				String nombre = "";
 				String apellidos = "";
 				String clave = "****";
 				String ciudad = "";
-				if (request.getSession().getAttribute("usuario") != null){
-					Usuario usuario = (Usuario)(request.getSession().getAttribute("usuario"));
+				Usuario usuario = (Usuario)(request.getAttribute("usuario"));
+// 				if (request.getSession().getAttribute("usuario") != null){
+// 					Usuario usuario = (Usuario)(request.getSession().getAttribute("usuario"));
+					idUsuario = usuario.getId();
 					email = usuario.getEmail();
 					nombre = usuario.getNombre();
 					apellidos = usuario.getApellidos();
 					ciudad = usuario.getCiudad();
-				} 
+// 				} 
+				if (usuario.getId()!= null){
+				%>
+				<input type="hidden" name="idUsuario" value="<%=idUsuario %>"/>
+				<%
+				}
 			%>
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">@</span> <input

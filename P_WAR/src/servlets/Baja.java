@@ -38,12 +38,20 @@ public class Baja extends HttpServlet {
 		System.out.println("TRON(Baja.java): Cargado Baja servlet");
 		
 		try {
-			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			DAOUsuario dao = new DAOUsuario();
+			Usuario usuario;
+			if (request.getParameter("idUsuario") != null){
+				usuario = dao.getUsuario(Integer.valueOf(request.getParameter("idUsuario")));
+			}
+			else
+				usuario = (Usuario) request.getSession().getAttribute("usuario");
 			dao.baja(usuario);
 			String success = "La baja del usuario se realizó correctamente.";
 			request.setAttribute("success", success);
-			request.getRequestDispatcher("/Controlador").forward(request, response);
+			if (request.getAttribute("volverA") != null)
+				request.getRequestDispatcher(request.getAttribute("volverA").toString()).forward(request, response);
+			else
+				request.getRequestDispatcher("/Controlador").forward(request, response);
 		} catch (DAOException e) {
 			System.out.println("TRON(Baja.java): KO. " + e.getMessage());
 			e.printStackTrace();

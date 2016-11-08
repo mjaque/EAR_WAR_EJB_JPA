@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +34,11 @@ public class Usuario {
 	@Column(nullable = false, length = 50, name = "ciudad")
 	private String ciudad;
 	
-	 @OneToMany(mappedBy = "usuario")
+	 @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
 	 private List<Producto> productos = new ArrayList<>();
+	 
+	 @Column(nullable = false, name = "admin")
+	 private Boolean admin;
 
 	public Integer getId() {
 		return id;
@@ -94,6 +98,14 @@ public class Usuario {
             producto.setUsuario(this);
         }
 		return result;
+	}
+	
+	public Boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 
 	@Override

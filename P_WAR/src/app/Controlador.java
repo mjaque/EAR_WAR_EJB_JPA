@@ -64,6 +64,7 @@ public class Controlador extends HttpServlet {
 					rd = request.getRequestDispatcher("/Login");
 					break;
 				case "ir_perfil":
+					request.setAttribute("usuario", request.getSession().getAttribute("usuario"));
 					rd = request.getRequestDispatcher("/perfil.jsp");
 					break;
 				case "perfil":
@@ -75,6 +76,8 @@ public class Controlador extends HttpServlet {
 				case "registro":
 					rd = request.getRequestDispatcher("/Registro");
 					break;
+				case "baja_usuario":
+					request.setAttribute("volverA", "listado_usuarios.jsp");
 				case "baja":
 					rd = request.getRequestDispatcher("/Baja");
 					break;
@@ -102,6 +105,12 @@ public class Controlador extends HttpServlet {
 				case "baja_producto":
 						rd = request.getRequestDispatcher("/BajaProducto");
 						break;
+				case "ir_modificar_usuario":
+					rd = request.getRequestDispatcher("/IrModificarUsuario");
+					break;
+				case "modificar_usuario":
+					rd = request.getRequestDispatcher("/ModificarUsuario");
+					break;
 				// Resto de acciones
 				default:
 					System.out.println("TRON(Controlador.java): Acción desconocida con usuario: " + accion);

@@ -123,7 +123,6 @@ public class DAOProducto implements DAOProductoRemote{
 	@Override
 	public List<Producto> verProductos(Usuario usuario) throws DAOException{
 		System.out.println("TRON(DAOProducto.verProductos(" + usuario +").");
-		System.out.println("TRON(DAOProducto.verProductos()):");
 		List<Producto> productos = null;
 		
 		EntityManager manager = null;

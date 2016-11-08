@@ -116,6 +116,7 @@ public class DAOUsuario implements DAOUsuarioRemote {
 		}
 	}
 
+	@Override
 	public void baja(Usuario usuario) throws DAOException{
 		System.out.println("TRON(DAOUsuario.baja("+usuario+")):");
 		
@@ -147,6 +148,68 @@ public class DAOUsuario implements DAOUsuarioRemote {
 	public List<Producto> verProductos(Usuario usuario)  throws DAOException{
 		DAOProducto daoProducto = new DAOProducto();
 		return daoProducto.verProductos(usuario);
+	}
+
+	@Override
+	public List<Usuario> verUsuarios() throws DAOException{
+		System.out.println("TRON(DAOUsuario.verUsuarios()):.");
+		List<Usuario> usuarios = null;
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOUsuario.verUsuarios()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			transaction.begin();
+			usuarios = (List<Usuario>)manager.createQuery("SELECT u FROM Usuario u")
+					.getResultList(); 
+			transaction.commit();
+			System.out.println("TRON(DAOUsuario.verUsuarios()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOUsuario.verUsuarios()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al buscar lista de usuarios.");
+		} finally {
+			manager.close();
+		}
+		return usuarios;
+	}
+
+	@Override
+	public Usuario getUsuario(Integer id) throws DAOException{
+		System.out.println("TRON(DAOUsario.getUsuario(" + id +")):");
+		Usuario usuario = null;
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOUsario.getUsuario()): EntityManager creado.");
+			transaction = manager.getTransaction();
+			transaction.begin();
+			usuario = (Usuario)manager.createQuery("SELECT u FROM Usuario u "
+					+ "WHERE id = :id")
+					.setParameter("id", id)
+					.getSingleResult(); 
+			transaction.commit();
+			System.out.println("TRON(DAOUsario.getUsuario()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOUsario.getUsuario()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al buscar Usuario("+id+").");
+		} finally {
+			manager.close();
+		}
+		return usuario;
 	}
 
 }
