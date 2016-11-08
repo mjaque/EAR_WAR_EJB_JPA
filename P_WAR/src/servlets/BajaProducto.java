@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.DAOException;
 import dao.DAOProducto;
 import dao.DAOProductoRemote;
+import dominio.Usuario;
 
 /**
  * Servlet implementation class BajaProducto
@@ -37,12 +38,15 @@ public class BajaProducto extends HttpServlet {
 		System.out.println("TRON(BajaProducto.java): Cargado Baja servlet");
 		
 		try {
-			Integer idProducto = Integer.valueOf(request.getParameter("id"));
+			Integer idProducto = Integer.valueOf(request.getParameter("idProducto"));
 			DAOProducto dao = new DAOProducto();
 			dao.baja(idProducto);
 			String success = "La baja del producto se realizó correctamente.";
 			request.setAttribute("success", success);
-			request.getRequestDispatcher("/MenuPrincipal").forward(request, response);
+			if (((Usuario)request.getSession().getAttribute("usuario")).isAdmin())
+				request.getRequestDispatcher("/AdminProductos").forward(request, response);
+			else
+				request.getRequestDispatcher("/MenuPrincipal").forward(request, response);
 		} catch (DAOException e) {
 			System.out.println("TRON(BajaProducto.java): KO. " + e.getMessage());
 			e.printStackTrace();

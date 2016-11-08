@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="dominio.Producto"%>
+<%@ page import="dominio.Usuario"%>
 <%@ page import="dao.DAOProducto"%>
 <%@ page import="java.math.BigDecimal"%>
 <%
@@ -11,6 +12,7 @@
 	BigDecimal precio = new BigDecimal(0.0);
 	Producto.Categoria categoria = Producto.Categoria.Vehiculos;
 	Producto.Estado estado = Producto.Estado.Disponible;
+	Integer idUsuario = null;
 
 	System.out.println("TRON: form_producto.jsp. idProducto = " + request.getParameter("idProducto"));
 	if (request.getParameter("idProducto") != null) {
@@ -23,8 +25,20 @@
 		precio = producto.getPrecio();
 		categoria = producto.getCategoria();
 		estado = producto.getEstado();
+		idUsuario = producto.getUsuario().getId();
 		%>
-		<input type="hidden" id="idProducto" name="id" value="<%=id%>"/>
+		<input type="hidden" id="idProducto" name="idProducto" value="<%=id%>"/>
+		<%
+	}
+	if (((Usuario)request.getSession().getAttribute("usuario")).isAdmin()) {
+		%>
+		<div class="input-group">
+			<span class="input-group-addon" id="basic-addon1"><span
+			class="glyphicon glyphicon-user" aria-hidden="true"></span> </span> <input
+			type="text" class="form-control" placeholder="idUsuario"
+			name="idUsuario" aria-describedby="basic-addon1" value="<%=idUsuario%>">
+		</div>
+		<br/>
 		<%
 	}
 %>

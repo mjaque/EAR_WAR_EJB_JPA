@@ -19,9 +19,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
 import app.Controlador;
-import dao.DAOException;
 import dao.DAOProducto;
 import dao.DAOProductoRemote;
+import dao.DAOUsuario;
+import dao.DAOUsuarioRemote;
 import dominio.Producto;
 import dominio.Usuario;
 
@@ -34,6 +35,9 @@ public class ModificarProducto extends HttpServlet {
 
 	@EJB
 	private DAOProductoRemote daoProducto;
+	
+	@EJB
+	private DAOUsuarioRemote daoUsuario;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -67,7 +71,7 @@ public class ModificarProducto extends HttpServlet {
 					String fieldvalue = new String(item.getString().getBytes("ISO-8859-1"));
 					System.out.println("TRON(ModificarProducto.java): " + fieldname + "= " + fieldvalue);
 					switch (fieldname) {
-					case "id":
+					case "idProducto":
 						producto.setId(Integer.valueOf(fieldvalue));
 						break;
 					case "titulo":
@@ -84,6 +88,10 @@ public class ModificarProducto extends HttpServlet {
 						break;
 					case "descripcion":
 						producto.setDescripcion(fieldvalue);
+						break;
+					case "idUsuario":
+						daoUsuario = new DAOUsuario();
+						producto.setUsuario(daoUsuario.getUsuario(Integer.valueOf(fieldvalue)));
 						break;
 					}
 				} else {
@@ -111,7 +119,10 @@ public class ModificarProducto extends HttpServlet {
 			System.out.println("TRON(ModificarProducto.java): OK");
 			String success = "El producto se modificó correctamente.";
 			request.setAttribute("success", success);
-			request.getRequestDispatcher("/ListadoProductos").forward(request, response);
+			if (((Usuario)request.getSession().getAttribute("usuario")).isAdmin())
+				request.getRequestDispatcher("/AdminProductos").forward(request, response);
+			else
+				request.getRequestDispatcher("/ListadoProductos").forward(request, response);
 		} catch (Exception e) {
 			System.out.println("TRON(ModificarProducto.java): KO. " + e.getMessage());
 			e.printStackTrace();
