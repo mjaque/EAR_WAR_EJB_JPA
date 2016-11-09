@@ -56,7 +56,7 @@
         <dependent-module archiveName="ejb-api-3.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/ejb/ejb-api/3.0/ejb-api-3.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="P1TIW_WAR_Usuarios-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/P1TIW_WAR_Usuarios/P1TIW_WAR_Usuarios">
+        <dependent-module archiveName="P1TIW_WAR-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/P1TIW_WAR/P1TIW_WAR">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

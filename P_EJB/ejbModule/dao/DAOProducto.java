@@ -1,5 +1,7 @@
 package dao;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,6 +11,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import dominio.Producto;
+import dominio.Producto.Categoria;
+import dominio.Producto.Estado;
 import dominio.Usuario;
 
 
@@ -275,6 +279,62 @@ public class DAOProducto implements DAOProductoRemote{
 			manager.close();
 		}
 		
+	}
+
+	@Override
+	public List<Producto> buscarProductos(String titulo, BigDecimal precio, Categoria categoria, Estado estado,
+			String descripcion) throws DAOException{
+		System.out.println("TRON(DAOProducto.buscarProductos()): " + titulo + ", " + precio  + ", " + categoria +  ", " + estado  + ", " + descripcion);
+		List<Producto> productos = null;
+		
+		EntityManager manager = null;
+		EntityTransaction transaction = null;
+
+		try {
+			manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			System.out.println("TRON(DAOProducto.buscarProductos()): EntityManager creado.");
+			String sql = "SELECT p FROM Producto p";
+			ArrayList<String> where = new ArrayList<>();
+			if (!titulo.isEmpty())
+				where.add("LOWER(titulo) LIKE :titulo");
+			if (!descripcion.isEmpty())
+				where.add("LOWER(descripcion) LIKE :descripcion");
+			if (precio != null)
+				where.add("precio = :precio");
+			if (categoria != null)
+				where.add("categoria = :categoria");
+			if (estado != null)
+				where.add("estado = :estado");
+			String strWhere = "";
+			if (where.size() > 0){
+				strWhere = " WHERE 1 ";
+				for (String criterio : where){
+					strWhere += " AND " + criterio;
+				}
+			}
+			sql += strWhere;
+			transaction = manager.getTransaction();
+			transaction.begin();
+			productos = (List<Producto>)manager.createQuery(sql)
+					.setParameter("titulo", "%"+titulo.toLowerCase()+"%")
+					.setParameter("descripcion", "%"+descripcion.toLowerCase()+"%")
+					.setParameter("precio", precio)
+					.setParameter("categoria", categoria)
+					.setParameter("estado", estado)
+					.getResultList(); 
+			transaction.commit();
+			System.out.println("TRON(DAOProducto.buscarProductos()): OK");
+		} catch (Exception ex) {
+			System.out.println("TRON(DAOProducto.buscarProductos()): KO " + ex.getMessage());
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			throw new DAOException("Error al buscar Productos (con criterios).");
+		} finally {
+			manager.close();
+		}
+		return productos;
 	}
 
 }

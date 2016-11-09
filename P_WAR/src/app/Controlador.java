@@ -120,6 +120,12 @@ public class Controlador extends HttpServlet {
 				case "ir_modificar_producto":
 					rd = request.getRequestDispatcher("/modificar_producto.jsp");
 					break;
+				case "ir_buscar_productos":
+					rd = request.getRequestDispatcher("/buscar_productos.jsp");
+					break;
+				case "buscar_productos":
+					rd = request.getRequestDispatcher("/BuscarProductos");
+					break;
 				// Resto de acciones
 				default:
 					System.out.println("TRON(Controlador.java): Acción desconocida con usuario: " + accion);

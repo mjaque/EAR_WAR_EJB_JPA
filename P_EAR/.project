@@ -5,7 +5,7 @@
 	<projects>
 		<project>P_WAR2</project>
 		<project>P1TIW_EJB</project>
-		<project>P1TIW_WAR_Usuarios</project>
+		<project>P1TIW_WAR</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

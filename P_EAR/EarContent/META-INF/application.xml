@@ -6,7 +6,7 @@
   </module>
   <module>
     <web>
-      <web-uri>P1TIW_WAR_Usuarios-0.0.1-SNAPSHOT.war</web-uri>
+      <web-uri>P1TIW_WAR-0.0.1-SNAPSHOT.war</web-uri>
       <context-root>/P1TIW</context-root>
     </web>
   </module>

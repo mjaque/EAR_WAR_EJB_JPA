@@ -26,8 +26,8 @@
 			<type>ejb</type>
 		</dependency>
 		<dependency>
-			<groupId>P1TIW_WAR_Usuarios</groupId>
-			<artifactId>P1TIW_WAR_Usuarios</artifactId>
+			<groupId>P1TIW_WAR</groupId>
+			<artifactId>P1TIW_WAR</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>

@@ -6,8 +6,8 @@
   </module>
   <module>
     <web>
-      <web-uri>P1TIW_WAR_Usuarios-0.0.1-SNAPSHOT.war</web-uri>
-      <context-root>/P1TIW_WAR_Usuarios</context-root>
+      <web-uri>P1TIW_WAR-0.0.1-SNAPSHOT.war</web-uri>
+      <context-root>/P1TIW_WAR</context-root>
     </web>
   </module>
   <library-directory>lib</library-directory>
