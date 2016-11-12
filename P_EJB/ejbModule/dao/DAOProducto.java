@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import dominio.Producto;
 import dominio.Producto.Categoria;
@@ -287,6 +288,9 @@ public class DAOProducto implements DAOProductoRemote{
 		System.out.println("TRON(DAOProducto.buscarProductos()): " + titulo + ", " + precio  + ", " + categoria +  ", " + estado  + ", " + descripcion);
 		List<Producto> productos = null;
 		
+		//TODO: enums vienen a null si no se han rellenado. ¿Y los textos?
+		//NumberFormatException en el servlet si no hay precio.
+		
 		EntityManager manager = null;
 		EntityTransaction transaction = null;
 
@@ -307,21 +311,28 @@ public class DAOProducto implements DAOProductoRemote{
 				where.add("estado = :estado");
 			String strWhere = "";
 			if (where.size() > 0){
-				strWhere = " WHERE 1 ";
+				strWhere = " WHERE ";
 				for (String criterio : where){
-					strWhere += " AND " + criterio;
+					strWhere += criterio + " AND ";
 				}
+				strWhere = strWhere.substring(0, strWhere.length() - 4);
 			}
 			sql += strWhere;
+			System.out.println("TRON(DAOProducto.buscarProductos()): SQL: " + sql);
 			transaction = manager.getTransaction();
 			transaction.begin();
-			productos = (List<Producto>)manager.createQuery(sql)
-					.setParameter("titulo", "%"+titulo.toLowerCase()+"%")
-					.setParameter("descripcion", "%"+descripcion.toLowerCase()+"%")
-					.setParameter("precio", precio)
-					.setParameter("categoria", categoria)
-					.setParameter("estado", estado)
-					.getResultList(); 
+			Query query = manager.createQuery(sql);
+			if (!titulo.isEmpty())
+					query.setParameter("titulo", "%"+titulo.toLowerCase()+"%");
+			if (!descripcion.isEmpty())
+					query.setParameter("descripcion", "%"+descripcion.toLowerCase()+"%");
+			if (precio != null)
+				query.setParameter("precio", precio);
+			if (categoria != null)
+					query.setParameter("categoria", categoria);
+			if (estado != null)
+					query.setParameter("estado", estado);
+			productos = (List<Producto>)query.getResultList(); 
 			transaction.commit();
 			System.out.println("TRON(DAOProducto.buscarProductos()): OK");
 		} catch (Exception ex) {

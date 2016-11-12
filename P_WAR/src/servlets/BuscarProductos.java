@@ -33,7 +33,6 @@ public class BuscarProductos extends HttpServlet {
 	 */
 	public BuscarProductos() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -47,13 +46,21 @@ public class BuscarProductos extends HttpServlet {
 		try {
 			//Recogemos los parámetros
 			String titulo = request.getParameter("titulo");
-			BigDecimal precio = new BigDecimal(request.getParameter("precio"));
+			BigDecimal precio;
+			if (request.getParameter("precio").isEmpty())
+				precio = null;
+			else
+				precio = new BigDecimal(request.getParameter("precio"));
 			Producto.Categoria categoria;
 			if (request.getParameter("categoria").equals("Cualquiera"))
 			 categoria = null;
 			else
-				categoria = Categoria.valueOf(request.getParameter("categoria"));	
-			Producto.Estado estado = Estado.valueOf(request.getParameter("estado"));
+				categoria = Categoria.valueOf(request.getParameter("categoria"));
+			Producto.Estado estado;
+			if (request.getParameter("estado").equals("Cualquiera"))
+				 estado = null;
+				else
+					estado = Estado.valueOf(request.getParameter("estado"));
 			String descripcion = request.getParameter("descripcion");
 			DAOProducto dao = new DAOProducto();
 			List<Producto> listadoProductos = dao.buscarProductos(titulo, precio, categoria, estado, descripcion);
