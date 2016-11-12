@@ -46,12 +46,15 @@ public class Baja extends HttpServlet {
 			else
 				usuario = (Usuario) request.getSession().getAttribute("usuario");
 			dao.baja(usuario);
+			System.out.println("TRON(Baja.java): Ok.");
 			String success = "La baja del usuario se realizó correctamente.";
 			request.setAttribute("success", success);
 			if (request.getAttribute("volverA") != null)
 				request.getRequestDispatcher(request.getAttribute("volverA").toString()).forward(request, response);
-			else
-				request.getRequestDispatcher("/Controlador").forward(request, response);
+			else{
+				System.out.println("TRON(Baja.java): Volviendo al login.");
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			}
 		} catch (DAOException e) {
 			System.out.println("TRON(Baja.java): KO. " + e.getMessage());
 			e.printStackTrace();

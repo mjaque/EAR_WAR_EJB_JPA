@@ -54,6 +54,7 @@ public class Perfil extends HttpServlet {
 				System.out.println("TRON(Perfil.java): Las claves no coinciden.");
 				String error = "Las claves no coinciden";
 				request.setAttribute("error", error);
+				request.setAttribute("usuario", request.getSession().getAttribute("usuario"));
 				request.getRequestDispatcher("/perfil.jsp").forward(request, response);
 			} else {
 				DAOUsuario daoUsuario = new DAOUsuario();
@@ -79,6 +80,7 @@ public class Perfil extends HttpServlet {
 						System.out.println("TRON(Perfil.jsp): No existe el algoritmo de encriptación MD5.");
 						e.printStackTrace();
 						request.setAttribute("error", "No existe el algoritmo de encriptación MD5");
+						request.setAttribute("usuario", request.getSession().getAttribute("usuario"));
 						request.getRequestDispatcher("/perfil.jsp").forward(request, response);
 					}
 				}
@@ -86,6 +88,7 @@ public class Perfil extends HttpServlet {
 				daoUsuario.modificar(usuario);
 				request.setAttribute("success", "Datos de usuario modificados correctamente");
 				System.out.println("TRON(Perfil.java): OK");
+				request.setAttribute("usuario", request.getSession().getAttribute("usuario"));
 				request.getRequestDispatcher("/perfil.jsp").forward(request, response);
 			}
 		} catch (DAOException e) {

@@ -1,17 +1,55 @@
-- DROP DATABASE practica1;
-- CREATE DATABASE practica1;
+Desde el prompt de MySQL/MariaDB loggeado como root:
+	- DROP DATABASE IF EXISTS tiw;
+	- CREATE DATABASE tiw;
+	- GRANT ALL ON tiw.* TO admin@localhost IDENTIFIED BY 'admin';
+	- FLUSH PRIVILEGES;
+
 - Crear el directorio /var/practica1/uploads con permisos de totales (rwx) para todos los usuarios
 - Arrancar GlassFish e instalar paquete EAR.
 - Conectar con localhost:8080/P1TIW
-- Ver Acerca De:
-- Volver al Login
-- Intentar un login: fallo.
-- Registro de Usuario: 
-- Login: OK
-- Modificar datos de usuario:
-- Login: OK.
-- Dar de Baja al usuario.
-- Crear otro usuario. Login.
-- Ir al menú Productos->Alta
-- Dar de alta un producto -> Debería aparecer el listado de productos con el nuevo producto.
-	- Debe verse con la foto.
+- Pulsar menú "Acerca de" y comprobar que se llega a la página de información.
+- Pulsar menú "Registro" y comprobar que se llega a la página de registro.
+- Pulsar menú "Login" y comprobar que se llega a la página de login.
+- Intentar acceder completando el formulario de login con cualquier email y cualquier clave. Debe mostrar Error al intentar el login.
+- Pulsar el enlace "Registro de nuevo usuario". Debe aparecer la página de registro.
+- Completar el formulario y pulsar Alta. Debe aparecer el menú principal con el aviso de que no hay productos.
+- Conectar otra vez con localhost:8080/P1TIW
+- Intentar un login con los datos erróneos. Debe aparecer el mensaje de error.
+- Ir a Registro de Usuario e intentar registrar un usuario con claves distintas. Debe aparecer un mensaje de error. 
+- Completar el formulario de registro con un nuevo usuario.
+- Ir al menú Acerca de. Debe aparecer la página de información.
+- Ir al menú Perfil. Debe aparecer la página de perfil.
+- Ir al menú Menú. Debe aparecer el menú principal.
+- Ir al menú Perfil y modificar los datos del usuario.
+- Intentar modificar el usuario poniendo dos claves distintas. Debe aparecer el mensaje de error.
+- Modificar la clave y comprobar que se hace bien el login con la nueva clave.
+- Ir al menú Perfil y pulsar "Baja". Cancelar la acción y comprobar que el usuario sigue activo.
+- Ir al menú Perfil y pulsar "Baja". Confirmar la acción y comprobar que ya no puede hacerse login con ese usuario.
+- Dar de alta un nuevu usuario en Registro. 
+- Ir al menú Mis Productos. Debe aparecer el aviso No hay Productos.
+- Ir al menú Productos-Alta. Debe aparecer el formulario de alta de producto.
+- Ir al menú Productos-Búsqueda. Debe aparecer el formulario de búsqueda avanzada de productos.
+- Ir al menú Productos-Alta y completar el formulario. Al dar el alta aparece el listado de productos con el nuevo producto.
+- Dar de alta varios productos con el usuario.
+- En el listado de productos, al pasar el ratón debe aparecer la descripción del producto.
+- Desde el listado de productos, hacer click sobre un producto. Debe aparecer el formulario de producto.
+- Desde el formulario de producto, modificar los datos de un producto. Si no se especifica ninguna foto debe continuar la misma. Tras la modificación se muestra el listado de productos del usuario.
+- Desde el formulario de producto, pulsar baja y Cancelar. Debe volverse al formulario de producto y el producto debe seguir en el listado.
+- Desde el formulario de producto, pulsar baja y Aceptar. Debe volverse al listado de productos donde ya no aparecerá el producto dado de baja.
+- Dar de alta productos con varios usuarios. En el menú principal deben aparecer productos de cualquier usuario.
+- En el menú principal utilizar el buscador rápido. Debe aparecer el listado de productos solo con productos que tengan el texto indicado en el título y/o la descripción. La búsqueda se lanza pulsando enter.
+
+PRUEBAS COMO ADMINISTRADOR
+En la base de datos modificar un usuario para hacerlo administrador. Para ello, desde el prompt de MySQL/MariaDB loggeado como root o admin, hacer:
+	UPDATE usuario SET admin=1 WHERE id=<id_del_usuario_elegido>;
+
+- Hacer login con el usuario administrador. Debe aparecer el listado de usuarios.
+- Pulsar el menú Acerca De: Debe aparecer la página de información.
+- Pulsar el menú Productos. Debe aparecer el listado de productos.
+- Pulsar el menú Usuarios. Debe aparecer el listado de usuarios.
+- Ir al listado de usuarios. Pulsar editar y modificar los datos de un usuario.
+- Ir al listado de usuarios y pulsar eliminar. Debe desaparecer el usuario y sus productos.
+- Ir al listado de productos. Pulsar editar y modificar los datos del producto.
+- Ir al listado de productos. Pulsar eliminar y el producto debe desaparecer.
+
+

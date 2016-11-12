@@ -53,6 +53,9 @@ public class Controlador extends HttpServlet {
 				case "registro":
 					rd = request.getRequestDispatcher("/Registro");
 					break;
+				case "ir_acerca":
+					rd = request.getRequestDispatcher("/acerca.jsp");
+					break;
 				// Resto de acciones
 				default:
 					System.out.println("TRON(Controlador.java): Acción desconocida sin usuario: " + accion);
@@ -125,6 +128,9 @@ public class Controlador extends HttpServlet {
 					break;
 				case "buscar_productos":
 					rd = request.getRequestDispatcher("/BuscarProductos");
+					break;
+				case "ir_acerca":
+					rd = request.getRequestDispatcher("/acerca.jsp");
 					break;
 				// Resto de acciones
 				default:

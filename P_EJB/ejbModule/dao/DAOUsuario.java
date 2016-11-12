@@ -128,6 +128,11 @@ public class DAOUsuario implements DAOUsuarioRemote {
 			System.out.println("TRON(DAOUsuario.baja()): EntityManager creado.");
 			transaction = manager.getTransaction();
 			transaction.begin();
+			for(Producto prod : usuario.getProductos()){
+				if (!manager.contains(prod))
+					prod = manager.merge(prod);	
+				manager.remove(prod);
+			}
 			if (!manager.contains(usuario))
 				usuario = manager.merge(usuario);			
 			manager.remove(usuario);
