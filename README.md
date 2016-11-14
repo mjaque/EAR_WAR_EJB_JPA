@@ -1,2 +1,3 @@
-# P1TIW
-Práctica 1 de Tecnologías de la Información
+# Aplicación EAR con (WAR+EJB) con JPA(Hibernate)
+Java 1.8
+Probada con Payara y MariaDB/MySQL
